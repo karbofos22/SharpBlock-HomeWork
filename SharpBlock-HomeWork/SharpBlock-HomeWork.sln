@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpBlock-HomeWork", "SharpBlock-HomeWork.csproj", "{99FD3243-8314-497C-AF66-B58ACB1726C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpBlock-HomeWork", "SharpBlock-HomeWork.csproj", "{99FD3243-8314-497C-AF66-B58ACB1726C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractClassInstance", "..\AbstractClassInstance\AbstractClassInstance.csproj", "{1DE258FD-914A-4F9C-A6D1-5C0089228F63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{99FD3243-8314-497C-AF66-B58ACB1726C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99FD3243-8314-497C-AF66-B58ACB1726C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99FD3243-8314-497C-AF66-B58ACB1726C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DE258FD-914A-4F9C-A6D1-5C0089228F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DE258FD-914A-4F9C-A6D1-5C0089228F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DE258FD-914A-4F9C-A6D1-5C0089228F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DE258FD-914A-4F9C-A6D1-5C0089228F63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
