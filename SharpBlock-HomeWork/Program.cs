@@ -8,7 +8,7 @@ namespace SharpBlock_HomeWork
         {
             TextProcessor textProcessor = new();
 
-            textProcessor.ProcessFile("dostoewskij"); //tolstoy - доп. файл для проверки
+            textProcessor.ProcessFile("tolstoy"); //tolstoy или dostoewskij - имена файлов для проверки
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using StopWord;
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -20,10 +21,21 @@ namespace SharpBlock_HomeWork
             {
                 var textToProcess = PrepareText(text);
 
+                var processedText1 = ParallelCountUniqueWords(textToProcess);
                 var processedText = CountUniqueWords(textToProcess);
 
                 WriteResultToFile(processedText);
             }
+        }
+
+        private void GetElapsedTime(Stopwatch stopWatch, string methodName)
+        {
+            TimeSpan ts = stopWatch.Elapsed;
+
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+            ts.Hours, ts.Minutes, ts.Seconds,
+            ts.Milliseconds / 10);
+            Console.WriteLine($"RunTime of {methodName} is " + elapsedTime);
         }
 
         private string ReadTextFromFile(string inputFileName)
@@ -74,11 +86,42 @@ namespace SharpBlock_HomeWork
         {
             if (words != null)
             {
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Start();
+
                 Type classType = typeof(UniqueWordsCounterLibrary.UniqueWordsCounter);
 
                 MethodInfo? method = classType.GetMethod("ProcessFile", BindingFlags.NonPublic | BindingFlags.Static);
 
                 Dictionary<string, int> uniqueWords = (Dictionary<string, int>)method.Invoke(null, new object[] { words });
+
+                stopWatch.Stop();
+                GetElapsedTime(stopWatch, "CountUniqueWords");
+
+                return uniqueWords;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid text file", nameof(words));
+            }
+        }
+
+        private Dictionary<string, int> ParallelCountUniqueWords(string[] words)
+        {
+            if (words != null)
+            {
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Start();
+
+                Type classType = typeof(UniqueWordsCounterLibrary.UniqueWordsCounter);
+
+                MethodInfo? method = classType.GetMethod("ParallelProcessFile", BindingFlags.NonPublic | BindingFlags.Static);
+
+                Dictionary<string, int> uniqueWords = (Dictionary<string, int>)method.Invoke(null, new object[] { words });
+
+                stopWatch.Stop();
+                GetElapsedTime(stopWatch, "ParallelCountUniqueWords");
+
 
                 return uniqueWords;
             }
