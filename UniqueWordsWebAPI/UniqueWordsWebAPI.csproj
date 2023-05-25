@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharpBlock-HomeWork\SharpBlock-HomeWork.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="UniqueWordsCounterLibrary">
+      <HintPath>..\SharpBlock-HomeWork\Files\UniqueWordsCounterLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

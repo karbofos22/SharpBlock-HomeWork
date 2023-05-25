@@ -28,6 +28,11 @@ namespace SharpBlock_HomeWork
             }
         }
 
+        public string[] PrepareTextViaApi(string text)
+        {
+            return PrepareText(text);
+        }
+
         private void GetElapsedTime(Stopwatch stopWatch, string methodName)
         {
             TimeSpan ts = stopWatch.Elapsed;
@@ -113,15 +118,10 @@ namespace SharpBlock_HomeWork
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
 
-                Type classType = typeof(UniqueWordsCounterLibrary.UniqueWordsCounter);
-
-                MethodInfo? method = classType.GetMethod("ParallelProcessFile", BindingFlags.NonPublic | BindingFlags.Static);
-
-                Dictionary<string, int> uniqueWords = (Dictionary<string, int>)method.Invoke(null, new object[] { words });
+                Dictionary<string, int> uniqueWords = UniqueWordsCounterLibrary.UniqueWordsCounter.ParallelProcessFile(words);
 
                 stopWatch.Stop();
                 GetElapsedTime(stopWatch, "ParallelCountUniqueWords");
-
 
                 return uniqueWords;
             }
@@ -133,13 +133,11 @@ namespace SharpBlock_HomeWork
 
         private void WriteResultToFile(Dictionary<string, int> processedFiled)
         {
-            var sortedWords = processedFiled.OrderByDescending(pair => pair.Value);
-
             string outputPath = Path.Combine(FilesDirectory, $"{fileName}_unique_words.txt");
 
             using (StreamWriter writer = new(outputPath))
             {
-                foreach (var pair in sortedWords)
+                foreach (var pair in processedFiled)
                 {
                     writer.WriteLine($"{pair.Key,-18}\t{pair.Value}");
                 }
