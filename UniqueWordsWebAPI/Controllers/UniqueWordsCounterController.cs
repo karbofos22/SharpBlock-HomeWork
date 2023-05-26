@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SharpBlock_HomeWork;
+using StopWord;
 using System.ComponentModel.DataAnnotations;
 using UniqueWordsCounterLibrary;
 
@@ -14,11 +14,9 @@ namespace UniqueWordsWebAPI.Controllers
         {
             try
             {
-                TextProcessor textProcessor = new();
+                var stopWords = StopWords.GetStopWords("ru");
 
-                var textToProcess = textProcessor.PrepareTextViaApi(text);
-
-                var result = UniqueWordsCounterLibrary.UniqueWordsCounter.ParallelProcessFile(textToProcess);
+                var result = UniqueWordsCounterLibrary.Counter.ParallelProcessFile(text, stopWords);
 
                 return Ok(result);
             }

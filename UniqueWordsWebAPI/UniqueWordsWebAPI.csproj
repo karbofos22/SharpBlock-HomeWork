@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="dotnet-stop-words" Version="1.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SharpBlock-HomeWork\SharpBlock-HomeWork.csproj" />
   </ItemGroup>
 
   <ItemGroup>
