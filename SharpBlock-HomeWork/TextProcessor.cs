@@ -2,7 +2,9 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
+using System.Text.Json;
 using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SharpBlock_HomeWork
 {
@@ -62,5 +64,45 @@ namespace SharpBlock_HomeWork
             ts.Milliseconds / 10);
             Console.WriteLine($"RunTime of {methodName} is " + elapsedTime);
         }
+
+        public async Task CountUniqueWordsViaAPI(string inputFile)
+        {
+            using (var client = new HttpClient())
+            {
+                string apiUrl = "https://localhost:7003/UniqueWordsCounter/Counter";
+
+                var formData = new MultipartFormDataContent
+                {
+                    { new StringContent(inputFile), "text" }
+                };
+
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsync(apiUrl, formData);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        var dictionary = JsonSerializer.Deserialize<Dictionary<string, int>>(content);
+
+                        foreach (var item in dictionary)
+                        {
+                            Console.WriteLine($"{item.Key,-18}\t{item.Value}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ошибка вызова API: " + response.StatusCode);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Ошибка вызова API: " + ex.Message);
+                }
+            }
+
+            Console.ReadLine();
+        }
     }
 }
+

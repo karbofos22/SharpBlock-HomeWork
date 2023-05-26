@@ -1,15 +1,20 @@
 ﻿using System.Reflection;
+using System.Text.Json;
 
 namespace SharpBlock_HomeWork
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
+            string text = "tolstoy"; // dostoewskij или просто текст
+
             TextProcessor textProcessor = new();
 
-            textProcessor.CountUniqueWords("tolstoy"); //tolstoy или dostoewskij - имена файлов для проверки
-            textProcessor.ParallelCountUniqueWords("tolstoy"); //tolstoy или dostoewskij - имена файлов для проверки
+            textProcessor.CountUniqueWords(text); 
+            textProcessor.ParallelCountUniqueWords(text);
+
+            await textProcessor.CountUniqueWordsViaAPI(text);
         }
     }
 }
